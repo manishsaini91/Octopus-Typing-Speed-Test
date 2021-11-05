@@ -5,197 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Octopus Typing Speed Test</title>
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-        .mainDiv{
-            width: 100%;
-            height: 100vh;
-            position: relative;
-            background-color: #3498db;
-
-        }
-        .centerDiv{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50% ,-50%);
-            text-align: center;
-        }
-        header{
-            width: 100%;
-            height: 10vh;
-            color: rgb(153, 19, 19);
-            background-color:pink ;
-            text-align: center;
-            font-size: 1.5rem;
-            justify-content: center;
-            align-items: center;
-            /* margin-top: 2px; */
-            text-transform: uppercase;
-            
-        }
-        #btn:hover {
-            background-color:green;
-
-        }
-        #rst:hover{
-            background-color: red;
-
-        }
-        header h2{
-            padding: 10px;
-        }
-
-        h1{
-            text-transform: capitalize;
-            text-align: center;
-            margin-bottom: 30px;
-            color: #ecf0f1;
-            text-shadow: 1px 2px 3px #2989b9;
-            font-size: 2.1rem;
-        }
-        h2{text-align: center;}
-        textarea{
-            background-color: #444;
-            box-shadow: 0 0 1px rgba(0,0,0,0.2);
-            border-radius: 10px 10px 0 0;
-            border:15px solid #61666b;
-            color: white;
-            font-size: 1rem;
-        }
-        .mainbtn{
-            padding: 10px 20px;
-            border-radius: 20px;
-            background:white;
-            font-size: 1rem;
-            /* text-decoration-style: none; */
-            /* box-decoration-break:unset; */
-        }
-        footer{
-            width: 100%;
-            height: 12vh;
-            background-color:black; 
-            /* position: relative; */
-            margin-bottom: 0%;
-            vertical-align: bottom;
-            margin-top: 37.5%;
-            /* float: inline-end;   */
-            /* margin-bottom: 0%; */
-            /* line-height: 80vh; */
-            /* float: inline-end; */
-            
-        }
-        #foot{color: white;
-            /* padding-top: 24px; */
-            padding: 7px;
-        
-        }
-      
-        #rst{
-            padding: 10px 20px;
-            border-radius: 20px;
-            background:white;
-            font-size: 1rem;
-        }
-
-    </style>
-
+    <link rel="icon" href="/octopus.png"/>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
     <div class="mainDiv">
-        <header><h2>Octopus Typing Speed Test</h2></header>
+        <header><img src="/octopus.png" alt="logo" id="logo" width="55" height="55"/>
+        <h2>Octopus Typing Speed Test</h2></header>
         <div class="centerDiv">
             <h1>Welcome to Typing Speed Test</h1>
             <h2 id="msg"></h2>
             <br>
-            <textarea name="" id="typeWords" cols="100" rows="10" placeholder="Start Writing from Here..."  ></textarea>
+            <textarea name="" id="typeWords" cols="100" rows="10" placeholder="Start Writing Here..." spellcheck="false" ></textarea>
             <br>
             <br>
             <button id="btn" class="mainbtn">Start</button>
             <button id="rst">Reset</button>
-            <!-- <a href="http://127.0.0.1:5500/project1.htm#" id="rst">Reset</a> -->
-            
-
         </div>
         <footer><h2 id="foot">Your Result come here...</h2></footer>
     </div>
-    <script>
-        const setOfWords=["My name is Manish Saini and I am from Nandgaon ,Nandgaon is a birth place of lord krishna ,krishna spend his childhood in Nandgaon and after childhood they wen to Mathura ","Hello! Jay how are you I am manish saini and whats about you ,what do you want to do ahead in future ","Hey! Ram what's about you ,Bro our eam India is not good in cricket what do you want to say about this.."];
-        const msg=document.getElementById('msg');
-        const typeWords=document.getElementById('typeWords');
-        const foot=document.getElementById('foot');
-        const btn=document.getElementById('btn');
-        let startTime,endTime;
-        const playGame=()=>{
-            let randomNumber=Math.floor(Math.random()*setOfWords.length);
-            msg.innerText=setOfWords[randomNumber];
-            let date= new Date ();
-            startTime=date.getTime();
-            btn.innerText="Done";
-        }
-        const wordCounter=(str)=>{
-            let response=str.split(" ").length;
-            return response;
-        }
-        const compareWords=(str1,str2)=>{
-            let words1=str1.split(" ");
-            let words2=str2.split(" ");
-            let cnt=0;
-
-            words1.forEach(function(item,index){
-                if(item==words2[index]){
-                    cnt++;
-                }
-
-                
-            })
-            let accuracy=Math.floor((cnt/words1.length)*100);
-            let errorWords=(words1.length-cnt);
-            return (cnt + " correct out of "+words1.length+" words , total number of error are "+errorWords+", your Accuracy is "+ accuracy+"%.");
-        }
-        const endPlay=()=>{
-            let date =new Date();
-            endTime=date.getTime();
-            let totalTime=((endTime-startTime)/1000);
-            let totalString=typeWords.value;
-            
-            let wordCount=wordCounter(totalString);
-            let speed=Math.round((wordCount/totalTime)*60);
-
-            let finalMsg="You can type at "+ speed +" words per minute and in last pharagraph you wrote ";
-            finalMsg+=compareWords(msg.innerText,totalString);
-
-            foot.innerText=finalMsg;
-
-
-        }
-        btn.addEventListener('click',function(){
-            if(this.innerText=='Start'){
-                foot.innerText=" ";
-                typeWords.focus();
-                
-                
-                typeWords.disabled=false;
-                playGame();
-            }
-            else if(this.innerText=="Done"){
-                typeWords.disabled=true;
-                btn.innerText="Start";
-
-                endPlay();
-                
-            }
-           
-        })
-        rst.addEventListener('click',function(){
-            location.reload();
-        })
-
+    <script src="script.js">
     </script>
-    
 </body>
 </html>

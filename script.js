@@ -58,6 +58,7 @@ btn.addEventListener('click',function(){
     if(this.innerText=='Start'){
         foot.innerText=" ";
         msg.style = "margin-top:15px;padding:10px;margin-bottom:15px";
+        typeWords.focus();
         
         typeWords.disabled=false;
         playGame();

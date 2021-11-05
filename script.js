@@ -22,10 +22,11 @@ const wordCounter=(str)=>{
     let response=str.split(" ").length;
     return response;
 }
+let cnt=0;
 const compareWords=(str1,str2)=>{
     let words1=str1.split(" ");
     let words2=str2.split(" ");
-    let cnt=0;
+    
 
     words1.forEach(function(item,index){
         if(item==words2[index]){
@@ -34,20 +35,22 @@ const compareWords=(str1,str2)=>{
 
         
     })
-    let accuracy=Math.floor((cnt/words1.length)*100);
-    let errorWords=(words1.length-cnt);
-    return (cnt + " words correct out of "+words1.length+" words , total number of error/left words are "+errorWords+" and your Accuracy is "+ accuracy+"%.");
-}
-const endPlay=()=>{
     let date =new Date();
     endTime=date.getTime();
     let totalTime=((endTime-startTime)/1000);
-    let totalString=typeWords.value;
+    let speed=Math.round((cnt/totalTime)*60);
+    let accuracy=Math.floor((cnt/words1.length)*100);
+    let errorWords=(words1.length-cnt);
+    return ("You typed at speed of "+ speed +" words per minute and in last para you wrote " + cnt + " words correct out of "+words1.length+" words , total number of error/left words are "+errorWords+" and your Accuracy is "+ accuracy+"%.");
+}
+const endPlay=()=>{
     
+   
+    let totalString=typeWords.value;
     let wordCount=wordCounter(totalString);
-    let speed=Math.round((wordCount/totalTime)*60);
+   
 
-    let finalMsg="You typed at speed of "+ speed +" words per minute and in last para you wrote ";
+    let finalMsg="";
     finalMsg+=compareWords(msg.innerText,totalString);
 
     foot.innerText=finalMsg;
@@ -59,14 +62,12 @@ btn.addEventListener('click',function(){
         foot.innerText=" ";
         msg.style = "margin-top:15px;padding:10px;margin-bottom:15px";
         typeWords.focus();
-        
         typeWords.disabled=false;
         playGame();
     }
     else if(this.innerText=="Done"){
         typeWords.disabled=true;
         btn.innerText="Start";
-
         endPlay();
         
     }

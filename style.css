@@ -114,10 +114,10 @@ footer{
     background-color:black; 
     height: 100px;
     text-align: center;
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
     /* vertical-align: bottom; */
-    /* margin-top: 400px; */
+    margin-top: 27.9vh;
     /* position: absolute; */
     /* float: inline-end;   */
     /* margin-bottom: 0%; */
